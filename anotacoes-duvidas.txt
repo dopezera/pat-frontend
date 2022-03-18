@@ -1,0 +1,25 @@
+quando defini <grid item> para envolver as props de ProfileContentContainer o grid não organizava esses itens. Tive que envolver Profile em <grid item>
+preciso definir um padrão de altura e largura para boxes e cards
+
+routes e useNavigate
+https://www.youtube.com/watch?v=UjHT_NKR_gU
+
+para ter botão de menu responsivo precisei fazer o DrawerComp e também importar useMediaQuery e useTheme do Material-UI
+https://www.youtube.com/watch?v=lUkxSnJ7aDw
+
+cheguei a um estágio onde preciso listar os menus do drawer em coluna e arrumar a nav visualmente apenas
+
+qual é a melhor forma de gerir as dimensões para que navbar fique sempre no topo e footer sempre no final da tela?
+
+o lvl da galera pode ser feito com Badges + label = lvl
+https://react-ui.io/components/badge
+
+regras do mix pode ser um scrolling modal
+https://react-ui.io/components/modal
+
+---
+
+encerrei sem mostrar KDR em profile pq não vem no que tá no localStorage
+- opcao 1: add a localStorage
+- opcao 2: dar find() nos players
+talvez puxar tudo da API seja ideal
