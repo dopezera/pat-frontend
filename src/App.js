@@ -12,8 +12,14 @@ import LoginScreen from './Screens/LoginScreen';
 import { useEffect, useState } from 'react';
 
 import verifyUserInfo from './controlUserInfo';
-//estou verificando se userInfo já tá em localStorage e se não estiver eu faço a requisição pra pegar dos cookies
-//ta gambiarroso pois no retorno de loginscreen eu seto em localstorage mas tb seto aqui no app
+
+/* Logica: 
+em App.js eu defino que const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+quando o App roda, uso verifyUserInfo(userInfo) pra ver se tem algo lá de fato, senão vou buscar no Cookie através de requisição a /api/users/isauth
+se num tem nada nem no cookie nem em localStorage significa que o usuário vai ser redirecionado pra /login ao tentar fazer alguma requisição sem autorização
+sempre que acesso /login e realizo login, atualizo o token no cookie e também localStorage com as informações do usuário
+*/
+
 const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
 function App() {
