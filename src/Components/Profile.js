@@ -4,7 +4,6 @@ import Avatar from '@mui/material/Avatar';
 
 
 function Profile(props) {
-
     return (
         <Grid item>
             <Card sx={{ width: 345 }}>
@@ -13,7 +12,7 @@ function Profile(props) {
                 <Avatar sx={{ height: 100, width: 100 }} aria-label="recipe" alt="Travis Howard" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx3NRpWq875XdnYw285UobozdDDvWd1m91kw&usqp=CAU" />
                 }
                 title={<Typography>{props.user.username}</Typography>}
-                subheader={<Typography>LVL: 10</Typography>}
+                subheader={<Typography>LVL: {props.user.impact}</Typography>}
             />
             <CardContent>
             <Grid container spacing={0}>
@@ -33,7 +32,7 @@ function Profile(props) {
                             
                         }}>
                         <Typography variant='h6' align='center'>Vitórias</Typography>
-                        <Typography variant='h4' align='center'>50%</Typography>
+                        <Typography variant='h4' align='center'>{props.user.winPercentage}</Typography>
                     </Box>
                 </Grid>
             </Grid>

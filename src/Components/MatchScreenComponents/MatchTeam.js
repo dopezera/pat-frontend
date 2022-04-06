@@ -2,8 +2,6 @@ import { Box, Grid, Table, TableHead, TableRow, TableCell, TableBody } from '@ma
 import { Badge, Typography } from '@mui/material';
 
 function MatchTeam(props) {
-  console.log('Tela do time: ');
-  console.log(props.team);
   return (
     <Grid item>
         <Box sx={{

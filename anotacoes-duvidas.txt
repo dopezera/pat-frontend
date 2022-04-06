@@ -19,7 +19,3 @@ https://react-ui.io/components/modal
 
 ---
 
-encerrei sem mostrar KDR em profile pq não vem no que tá no localStorage
-- opcao 1: add a localStorage
-- opcao 2: dar find() nos players
-talvez puxar tudo da API seja ideal

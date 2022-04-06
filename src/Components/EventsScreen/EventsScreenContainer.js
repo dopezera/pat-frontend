@@ -1,3 +1,5 @@
+//Não está sendo usado agora
+
 import { Box, Button } from "@material-ui/core";
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -16,8 +18,8 @@ function EventsScreenContainer(props) {
         padding: 20,
         }} 
         justifyContent='center'>
-        <Button><ArrowBackIcon/></Button>
-        <Button><ArrowForwardIcon/></Button>
+        {/*<Button><ArrowBackIcon/></Button>
+        <Button><ArrowForwardIcon/></Button>*/}
       </Box>
     </>
   )

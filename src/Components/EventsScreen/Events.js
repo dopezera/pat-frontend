@@ -18,18 +18,14 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 import { Box } from '@mui/system';
-  
-  const SmallAvatar = styled(Avatar)(({ theme }) => ({
-    width: 22,
-    height: 22,
-    border: `2px solid ${theme.palette.background.paper}`,
-  }));
 
-export default function Events() {
+export default function Events(props) {
 
-  const [checkedIn, setCheckedIn] = React.useState(false)
+  const [checkedIn, setCheckedIn] = React.useState(false)  
 
-  
+  // ** show all checkedin users for each event **
+  //fetch all checkins
+  //map checkins where props.events.id = checkin.event.id
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -42,8 +38,8 @@ export default function Events() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="MIX CS GO"
-        subheader="Março 16, 2022"
+        title={props.events.description}
+        subheader={"Março 16, 2022"+" Status: "+props.events.status}
       />
       <CardMedia
         component="img"

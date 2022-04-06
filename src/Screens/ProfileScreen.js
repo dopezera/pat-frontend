@@ -6,20 +6,35 @@ import PlayersRankBox from "../Components/PlayersRank";
 import Axios from 'axios';
 import config from '../config'
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ProfileScreen() {
 
   const [allPlayers, setAllPlayers] = useState([])
+  const [loading, setLoading] = useState(true)
   const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  //se eu remover userInfo de localStorage e recarregar a pagina /profile, vai bugar. mesmo eu fazendo a verificação em App
+
+  let navigate = useNavigate()
 
   useEffect(() => {
-    Axios.get(`${config.BACKEND_URL}/api/users`).then((response) => {
+    Axios.get(`${config.BACKEND_URL}/api/users`, { withCredentials: true }).then((response) => {
       setAllPlayers(response.data)
-      console.log(userInfo)
+      setLoading(false)
+    }).catch(err => {
+      if(err.response.status === 401) {
+        navigate('/login')
+      } 
     })
   }, [])
 
-  if (!allPlayers) return null
+  if(loading) {
+    return <div>Loading Profile</div>
+  }
+
+  if(!userInfo) {
+    return <div>Loading userInfo</div>
+  }
 
   return (
     <ProfileScreenContainer>

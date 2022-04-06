@@ -5,7 +5,7 @@ function EventsPresentationBox(props) {
     <Grid container direction='row' spacing={2} sx={{
         flexDirection: 'row',
         }} justifyContent='center'> 
-
+        
         {props.children}
         
     </Grid> 

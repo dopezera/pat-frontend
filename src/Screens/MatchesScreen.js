@@ -5,21 +5,30 @@ import MatchTeam from '../Components/MatchScreenComponents/MatchTeam';
 
 import Axios from 'axios';
 import config from '../config';
+import { useNavigate } from "react-router-dom";
 
 function MatchesScreen() {
 
+  let navigate = useNavigate()
+
   const [matches, setMatches] = useState(null)
+  const [loading, setLoading] = useState(true)
   const [currentMatchState, setCurrentMatchState] = useState(10)
 
   useEffect(() => {
-    Axios.get(`${config.BACKEND_URL}/api/matches`).then(response => {
+    Axios.get(`${config.BACKEND_URL}/api/matches`, { withCredentials: true }).then(response => {
       setMatches(response.data)
+      setLoading(false)     
+    }).catch(err => {
+      if(err.response.status === 401) {
+        navigate('/login')
+      }
     })
   }, [])
 
-  if (!matches) return null;
-  console.log(matches)
-
+  if(loading) {
+    return <div>Loading Matches</div>
+  }
 
   const winnerTeam = () => {
     const currentMatch = matches[currentMatchState]
@@ -28,7 +37,7 @@ function MatchesScreen() {
   }
 
   const looserTeam = () => {
-    const currentMatch = matches[49]
+    const currentMatch = matches[currentMatchState]
     const winner = currentMatch.players_details[0].m_winner
     return currentMatch.players_details.filter((playerDetail) => playerDetail.team !== winner)
   }
