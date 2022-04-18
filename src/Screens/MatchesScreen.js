@@ -32,14 +32,15 @@ function MatchesScreen() {
 
   const winnerTeam = () => {
     const currentMatch = matches[currentMatchState]
-    const winner = currentMatch.players_details[0].m_winner
-    return currentMatch.players_details.filter((playerDetail) => playerDetail.team === winner)
+    console.log(currentMatch)
+    const winner = currentMatch.m_winner
+    return currentMatch.players.filter((playerDetail) => playerDetail.team === winner)
   }
 
   const looserTeam = () => {
     const currentMatch = matches[currentMatchState]
-    const winner = currentMatch.players_details[0].m_winner
-    return currentMatch.players_details.filter((playerDetail) => playerDetail.team !== winner)
+    const winner = currentMatch.m_winner
+    return currentMatch.players.filter((playerDetail) => playerDetail.team !== winner)
   }
 
 
