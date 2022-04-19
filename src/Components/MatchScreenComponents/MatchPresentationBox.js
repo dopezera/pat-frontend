@@ -9,7 +9,7 @@ function MatchPresentationBox(props) {
             }} 
             justifyContent='center'>
 
-            <h2 align='center'>{props.match.map_name}</h2>
+            <h2 align='center'>{props.match.map}</h2>
 
             <Grid container direction='row' spacing={2} sx={{
                 flexDirection: 'row',

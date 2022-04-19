@@ -15,7 +15,7 @@ function MatchTeam(props) {
             opacity: [0.9, 0.8, 0.7],
             },
         }}>
-            <h2 align='center'>{props.team[0].ct_score}</h2>
+            <h2 align='center'>{props.teamScore}</h2>
          
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>

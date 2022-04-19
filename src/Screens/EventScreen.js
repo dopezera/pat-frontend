@@ -16,7 +16,7 @@ function EventsScreen() {
 
   let navigate = useNavigate()
 
-  const [allEvents, setAllEvents] = useState([])
+  const [allEvents, setAllEvents] = useState(null)
   const [loading, setLoading] = useState(true)
 
   const [current, setCurrent] = useState(0)
@@ -39,9 +39,12 @@ function EventsScreen() {
 
   useEffect(() => {
     console.log('useEffect nervoso')
-    Axios.get(`${config.BACKEND_URL}/api/events`, { withCredentials: true }).then((response) => {
-      setAllEvents(response.data)
-      setLoading(false)
+    Axios.get(`${config.BACKEND_URL}/api/events`, { withCredentials: true })
+    .then((response) => {
+      if (response.data.length > 0) {
+        setAllEvents(response.data)
+        setLoading(false)
+      } 
     }).catch(err => {
       if(err.response.status === 401) {
         navigate('/login')
@@ -56,7 +59,7 @@ function EventsScreen() {
   return (
     <>
        <EventsPresentationBox>
-        <Events events={allEvents[current]}></Events>
+        <Events events={allEvents[current]} current={current}></Events> 
       </EventsPresentationBox>
       <Box sx={{
         display: 'flex',
