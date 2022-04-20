@@ -31,23 +31,59 @@ export default function Events(props) {
   const [checkedIn, setCheckedIn] = React.useState(false)  
   const [allCheckins, setAllCheckins] = React.useState([])
   const [loading, setLoading] = React.useState(true)
-  // ** show all checkedin users for each event **
-  //fetch all checkins
-  //map checkins where props.events.id = checkin.event.id
+
+  const handleCheckIn = () => {
+    if (checkedIn) {
+      return
+    }
+    Axios.get(`${config.BACKEND_URL}/api/events/checkin/${props.events.id}`, { withCredentials: true })
+    .then(response => {
+      if (response.data.id) {
+        return setCheckedIn(true)
+      }
+      alert(response.data)
+      return
+    })
+  }
+
+  const handleCheckOut = () => {
+    const isUserCheckedIn = allCheckins.find(checkIfCheckedIn)
+    console.log(isUserCheckedIn.id)
+    if(isUserCheckedIn) {
+      Axios.get(`${config.BACKEND_URL}/api/events/checkin/delete/${isUserCheckedIn.id}`, { withCredentials: true })
+      .then(response => {
+        if (response.data.id) {
+          setCheckedIn(false)
+          return alert('Checkin cancelado!!')
+        }
+        alert(response.data)
+        return
+      })
+    }
+  }
+
+  const checkIfCheckedIn = (checkin) => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo')) 
+    return (checkin.userSteamId === userInfo.steamid)
+  }
   
   React.useEffect(() => {
     Axios.get(`${config.BACKEND_URL}/api/events/checkins/${props.events.id}`, { withCredentials: true })
     .then((response) => {
       setAllCheckins(response.data)
+      const isUserCheckedIn = response.data.find(checkIfCheckedIn)
+      if(isUserCheckedIn) {
+        setCheckedIn(true)
+      } else {
+        setCheckedIn(false)
+      }
       setLoading(false)
     }).catch(err => {
       if(err.response.status === 401) {
         navigate('/login')
       } 
     })
-  }, [props.events.id])
-
-  console.log(allCheckins)
+  }, [props.events.id, checkedIn])
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -108,7 +144,7 @@ export default function Events(props) {
             }} 
             justifyContent='center'>
           <Button onClick={() => {
-          setCheckedIn(state => !state)
+          handleCheckOut()
         }}><CheckBoxIcon color='success'></CheckBoxIcon></Button> 
           <Typography variant='subtitle' align='center'>Checkin realizado!</Typography>
         </Box>
@@ -128,7 +164,7 @@ export default function Events(props) {
           }} 
           justifyContent='center'>
         <Button variant='contained' onClick={() => {
-          setCheckedIn(state => !state)
+          handleCheckIn()
         }}>Check-in</Button> 
         </Box>
         }
